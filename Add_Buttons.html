@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+    var CounterChallenge = React.createClass({
+      getInitialState: function() {
+        return {
+          count: 0
+        }
+      },
+      incrementCount: function(value) {
+        this.setState({
+          count: this.state.count + value
+        })
+      },
+      getDefaultProps : function(){
+         return {
+             valueone : 1,
+             valuetwo : 5,
+             valuethree : 10,
+             text : 'Add'
+         }
+      },
+      alert : function(){
+        alert("alert activated")
+      },
+      render: function() {
+        return (
+     <div className="container">
+        <h1>Count: {this.state.count}</h1>
+        <Button text={`${this.props.text} ${this.props.valueone}`} style="btn blue-btn" value={this.props.valueone} clickHandler={this.incrementCount.bind(this, this.props.valueone)}/>  
+        <Button text={`${this.props.text} ${this.props.valuetwo}`} style="btn green-btn" value={this.props.valuetwo} clickHandler={this.incrementCount.bind(this, this.props.valuetwo)}/>  
+        <Button text={`${this.props.text} ${this.props.valuethree}`} style="btn purple-btn" value={this.props.valuethree} clickHandler={this.incrementCount.bind(this, this.props.valuethree)}/> 
+        <Button text='Alert!' clickHandler={this.alert} />
+     </div>
+        )
+      }
+    });
+
+   var Button = function(props)
+   {
+       return (
+           <button className={props.style} value={props.value} onClick={props.clickHandler}>
+               {props.text}
+           </button>
+       )
+   }
+
+    ReactDOM.render(
+      <CounterChallenge valueone={100} valuetwo={1000} valuethree={10000}/>,
+      document.getElementById('app')
+    );
+    </script>
+  </body>
+</html>
